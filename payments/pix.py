@@ -7,7 +7,7 @@ class Pix:
     
     def create_payment(self):
         # creates payment on the bank institution
-        bank_payment_id =  uuid.uuid4()  #generate random 
+        bank_payment_id =  str(uuid.uuid4())  #generate random uuid object and convert to string
 
         # generates fake hash 
         hash_payment =  f'hash_payment_{bank_payment_id}'
@@ -17,5 +17,5 @@ class Pix:
         img.save(f"static/img/qr_code_payment_{bank_payment_id}.png") #save image to static folder
 
 
-        return {"payment_bank_id": "",
+        return {"bank_payment_id": bank_payment_id,
                 "qr_code_path":f"qr_code_payment_{bank_payment_id}"}
