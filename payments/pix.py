@@ -14,7 +14,7 @@ class Pix:
 
         # generate qr code
         img = qrcode.make(hash_payment) # create imagem for qr_code
-        img.savee(f"static/img/qr_code_payment_{bank_payment_id}.png") #save image to static folder
+        img.save(f"static/img/qr_code_payment_{bank_payment_id}.png") #save image to static folder
 
 
         return {"payment_bank_id": "",
