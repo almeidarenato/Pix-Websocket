@@ -44,6 +44,9 @@ def payment_pix_page(payment_id):
                            payment_value=payment.value, 
                            host ="http://127.0.0.1:5000", 
                            qrcode = payment.qr_code)
+@socketio.on('connect') # event when the clients connect to app
+def handle_connect():
+    print('Client connected to the server')
 
 if __name__ =='__main__':
    socketio.run(app,debug=True)
