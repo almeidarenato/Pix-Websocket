@@ -43,8 +43,8 @@ def pix_confirmation():
 
     payment = Payment.query.filter_by(bank_payment_id=data.get("bank_payment_id")).first()
 
-    if not payment:
-        return jsonify({"message":"Payment"}),404
+    if not payment or payment.paid:
+        return jsonify({"message":"Payment not found"}),404
     
     if data.get("value") != payment.value:
         return jsonify({"message":"Invalid payment data"}),400
