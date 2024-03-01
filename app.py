@@ -32,8 +32,25 @@ def create_payment_pix():
 @app.route('/payments/pix/qr_code/<file_name>',methods=['GET'])
 def get_image(file_name):
     return send_file(f"static/img/{file_name}.png",mimetype='image/png')
+
 @app.route('/payments/pix/confirmation',methods=['POST'])
 def pix_confirmation():
+    data = request.get_json()
+
+
+    if "bank_payment_id" not in data:
+        return jsonify({"message":"Invalid payment data"}),400
+
+    payment = Payment.query.filter_by(bank_payment_id=data.get("bank_payment_id")).first()
+
+    if not payment:
+        return jsonify({"message":"Payment"}),404
+    
+    if data.get("value") != payment.value:
+        return jsonify({"message":"Invalid payment data"}),400
+
+    payment.paid = True
+    db.session.commit()
     return jsonify({"message":"The payment has been confirmed"})
 
 @app.route('/payments/pix/<int:payment_id>',methods=['GET'])
