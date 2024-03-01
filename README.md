@@ -1,11 +1,16 @@
 # Pix-Websocket
 Application with realtime notification via websocket with Python + Flask
 
-# Project Status
+## Project Status
 Work In Progress  
 
-# Installation
+## Installation
 
 ```sh
 pip3 install -r requirements.txt
 ```
+
+# Libs
+
+Flask
+Flask SocketIO
